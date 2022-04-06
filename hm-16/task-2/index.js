@@ -2,8 +2,6 @@
 
 const arrTags = document.body.querySelectorAll("*");
 
-console.log(arrTags);
-
 const countTags = (arr) => {
   let newArr = Array.from(arr);
 
