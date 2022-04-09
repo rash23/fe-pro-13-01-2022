@@ -2,27 +2,29 @@ class DialogComponent extends BaseComponent {
   constructor(...args) {
     super(...args);
 
-    if (this.container instanceof HTMLElement) {
+    if (super.isHTMLElement(this.container)) {
       this.container.hidden = true;
     }
   }
 
   showOverlay() {
-    if (this.container instanceof HTMLElement) {
+    if (super.isHTMLElement(this.container)) {
       this.container.hidden = false;
     }
   }
+
   deleteOverlay() {
-    if (this.container instanceof HTMLElement) {
+    if (super.isHTMLElement(this.container)) {
       this.container.hidden = true;
     }
   }
+
   showMessage() {
     alert("Bingo!!!!");
   }
 }
 
-const dialog = new DialogComponent(document.querySelector(".app-dialog"), {});
+const dialog = new DialogComponent(document.querySelector(".app-dialog"));
 
 document.querySelector(".section button").onclick = () => {
   dialog.showOverlay();

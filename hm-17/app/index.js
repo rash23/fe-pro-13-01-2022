@@ -9,4 +9,8 @@ class BaseComponent {
     this.container = container;
     this.props = props;
   }
+
+  isHTMLElement(elem) {
+    return elem instanceof HTMLElement;
+  }
 }
