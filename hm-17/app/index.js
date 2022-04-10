@@ -1,13 +1,12 @@
 class DOMError extends Error {}
 
 class BaseComponent {
-  constructor(container, props = {}) {
+  constructor(container) {
     if (!(container instanceof HTMLElement)) {
       throw new DOMError("Container not found");
     }
 
     this.container = container;
-    this.props = props;
   }
 
   isHTMLElement(elem) {

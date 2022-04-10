@@ -24,7 +24,12 @@ class RatingComponent extends BaseComponent {
           }
         }
       };
+    });
+  }
 
+  mouseOut() {
+    const stars = this.ratingItems;
+    stars.forEach((star) => {
       star.onmouseout = () => {
         stars.forEach((star) => {
           star.classList.remove("previewed");
@@ -32,6 +37,7 @@ class RatingComponent extends BaseComponent {
       };
     });
   }
+
   setRating() {
     let index = 0;
     let stars = this.ratingItems;
@@ -41,6 +47,7 @@ class RatingComponent extends BaseComponent {
       star.onclick = () => {
         star.classList.add("selected");
         index = i;
+
         if (i > 0) {
           let prevSibling = star.previousElementSibling;
           prevSibling.classList.add("selected");
@@ -53,6 +60,7 @@ class RatingComponent extends BaseComponent {
             }
           }
         }
+
         for (let i = index + 1; i < stars.length; i++) {
           const elem = stars[i];
           elem.classList.remove("selected");
@@ -65,4 +73,5 @@ class RatingComponent extends BaseComponent {
 const rating = new RatingComponent(document.querySelector(".app-rating"));
 
 rating.mouseOver();
+rating.mouseOut();
 rating.setRating();
