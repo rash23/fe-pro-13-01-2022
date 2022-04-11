@@ -67,7 +67,6 @@ class Accordion extends BaseComponent {
     let accords = document.querySelectorAll(`.${accordClass}`);
 
     accords.forEach((element) => {
-      console.log(element);
       element.querySelector(`.${accordHeadClass}`).onclick = () => {
         this.toggleAccordion(element);
       };
@@ -109,7 +108,6 @@ class Accordion extends BaseComponent {
 
   createNewAccordians(arr) {
     arr = this.props;
-    console.log(arr);
 
     arr.forEach((element) => {
       this.create(element.title, element.body);
