@@ -8,8 +8,4 @@ class BaseComponent {
 
     this.container = container;
   }
-
-  isHTMLElement(elem) {
-    return elem instanceof HTMLElement;
-  }
 }

@@ -3,67 +3,59 @@ class RatingComponent extends BaseComponent {
     super(...args);
 
     this.ratingItems = this.container.querySelectorAll("i");
+
+    this.onMouseOver();
+    this.onMouseOut();
+    this.setRating();
   }
 
-  mouseOver() {
+  onMouseOver() {
     const stars = this.ratingItems;
     stars.forEach((star, i) => {
       star.onmouseover = () => {
         star.classList.add("previewed");
+        let prevSibling = star.previousElementSibling;
 
-        if (i > 0) {
-          let prevSibling = star.previousElementSibling;
-          prevSibling.classList.add("previewed");
-
-          while (prevSibling) {
+        while (prevSibling) {
+          if (prevSibling) {
+            prevSibling.classList.add("previewed");
             prevSibling = prevSibling.previousElementSibling;
-
-            if (prevSibling) {
-              prevSibling.classList.add("previewed");
-            }
           }
         }
       };
     });
   }
 
-  mouseOut() {
+  onMouseOut() {
     const stars = this.ratingItems;
     stars.forEach((star) => {
       star.onmouseout = () => {
-        stars.forEach((star) => {
+        if (star.classList.contains("previewed")) {
           star.classList.remove("previewed");
-        });
+        }
       };
     });
   }
 
   setRating() {
-    let index = 0;
     let stars = this.ratingItems;
-    stars = Array.from(stars);
 
-    stars.map((star, i) => {
+    stars.forEach((star) => {
       star.onclick = () => {
         star.classList.add("selected");
-        index = i;
 
-        if (i > 0) {
-          let prevSibling = star.previousElementSibling;
-          prevSibling.classList.add("selected");
+        let prevSibling = star.previousElementSibling;
+        let nextSibling = star.nextElementSibling;
 
-          while (prevSibling) {
+        for (let i = 1; i < 5; i++) {
+          if (prevSibling) {
+            prevSibling.classList.add("selected");
             prevSibling = prevSibling.previousElementSibling;
-
-            if (prevSibling) {
-              prevSibling.classList.add("selected");
-            }
           }
-        }
-
-        for (let i = index + 1; i < stars.length; i++) {
-          const elem = stars[i];
-          elem.classList.remove("selected");
+          if (nextSibling) {
+            nextSibling.classList.remove("selected");
+            nextSibling = nextSibling.nextElementSibling;
+          }
         }
       };
     });
@@ -71,7 +63,3 @@ class RatingComponent extends BaseComponent {
 }
 
 const rating = new RatingComponent(document.querySelector(".app-rating"));
-
-rating.mouseOver();
-rating.mouseOut();
-rating.setRating();

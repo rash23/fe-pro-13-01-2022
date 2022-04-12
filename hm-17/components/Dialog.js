@@ -2,21 +2,40 @@ class DialogComponent extends BaseComponent {
   constructor(...args) {
     super(...args);
 
-    if (super.isHTMLElement(this.container)) {
-      this.container.hidden = true;
+    this.container.hidden = true;
+
+    const button = document.querySelector(".section button");
+
+    if (button instanceof HTMLElement) {
+      button.onclick = () => {
+        this.showOverlay();
+      };
+    }
+
+    const onReject = document.querySelector("[data-dialog-reject]");
+
+    if (onReject instanceof HTMLElement) {
+      onReject.onclick = () => {
+        this.hideOverlay();
+      };
+    }
+
+    const onSubmit = document.querySelector("[data-dialog-submit]");
+
+    if (onSubmit instanceof HTMLElement) {
+      onSubmit.onclick = () => {
+        this.showMessage();
+        this.hideOverlay();
+      };
     }
   }
 
   showOverlay() {
-    if (super.isHTMLElement(this.container)) {
-      this.container.hidden = false;
-    }
+    this.container.hidden = false;
   }
 
-  deleteOverlay() {
-    if (super.isHTMLElement(this.container)) {
-      this.container.hidden = true;
-    }
+  hideOverlay() {
+    this.container.hidden = true;
   }
 
   showMessage() {
@@ -25,16 +44,3 @@ class DialogComponent extends BaseComponent {
 }
 
 const dialog = new DialogComponent(document.querySelector(".app-dialog"));
-
-document.querySelector(".section button").onclick = () => {
-  dialog.showOverlay();
-};
-
-document.querySelector("[data-dialog-reject]").onclick = () => {
-  dialog.deleteOverlay();
-};
-
-document.querySelector("[data-dialog-submit]").onclick = () => {
-  dialog.showMessage();
-  dialog.deleteOverlay();
-};
