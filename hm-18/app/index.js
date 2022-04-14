@@ -23,6 +23,8 @@ class Accordion extends BaseComponent {
     this.accordions = document.createElement("div");
     this.accordions.classList.add("accordions");
     this.body.append(this.accordions);
+
+    this.createNewAccordians();
   }
 
   create(title, text) {
@@ -128,5 +130,3 @@ const items = [
 ];
 
 const accordions = new Accordion(document.querySelector("body"), items);
-
-accordions.createNewAccordians();
