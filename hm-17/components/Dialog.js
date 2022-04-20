@@ -6,28 +6,18 @@ class DialogComponent extends BaseComponent {
 
     const button = document.querySelector(".section button");
 
-    if (button instanceof HTMLElement) {
-      button.onclick = () => {
-        this.showOverlay();
-      };
-    }
+    button.onclick = () => this.showOverlay();
 
-    const onReject = document.querySelector("[data-dialog-reject]");
+    const rejectButton = document.querySelector("[data-dialog-reject]");
 
-    if (onReject instanceof HTMLElement) {
-      onReject.onclick = () => {
-        this.hideOverlay();
-      };
-    }
+    rejectButton.onclick = () => this.hideOverlay();
 
-    const onSubmit = document.querySelector("[data-dialog-submit]");
+    const submButton = document.querySelector("[data-dialog-submit]");
 
-    if (onSubmit instanceof HTMLElement) {
-      onSubmit.onclick = () => {
-        this.showMessage();
-        this.hideOverlay();
-      };
-    }
+    submButton.onclick = () => {
+      this.props.showMessage();
+      this.hideOverlay();
+    };
   }
 
   showOverlay() {
@@ -37,10 +27,10 @@ class DialogComponent extends BaseComponent {
   hideOverlay() {
     this.container.hidden = true;
   }
-
-  showMessage() {
-    alert("Bingo!!!!");
-  }
 }
 
-const dialog = new DialogComponent(document.querySelector(".app-dialog"));
+const dialog = new DialogComponent(document.querySelector(".app-dialog"), {
+  showMessage: () => {
+    alert("Bingo!!!!");
+  },
+});
