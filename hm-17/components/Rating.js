@@ -4,12 +4,12 @@ class RatingComponent extends BaseComponent {
 
     this.ratingItems = this.container.querySelectorAll("i");
 
-    this.onMouseOver();
-    this.onMouseOut();
+    this.mouseOver();
+    this.mouseOut();
     this.setRating();
   }
 
-  onMouseOver() {
+  mouseOver() {
     const stars = this.ratingItems;
     stars.forEach((star, i) => {
       star.onmouseover = () => {
@@ -26,7 +26,7 @@ class RatingComponent extends BaseComponent {
     });
   }
 
-  onMouseOut() {
+  mouseOut() {
     const stars = this.ratingItems;
     stars.forEach((star) => {
       star.onmouseout = () => {
