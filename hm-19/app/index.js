@@ -15,7 +15,7 @@ class Minesweeper {
 		this.table = table;
 
 		this.beginBtn = this.startBtn();
-		this.difficulty = this.difficultyLvl(1, 2, 3);
+		this.difficulty = this.difficultyLvl(3, 2, 1);
 
 		this.table.append(this.beginBtn, this.difficulty);
 
@@ -33,6 +33,8 @@ class Minesweeper {
 			this.startGame();
 			this.messageInfo.style.display = 'none';
 		});
+
+		this.field = this.renderField();
 	}
 
 	startBtn() {
@@ -42,15 +44,18 @@ class Minesweeper {
 		return start;
 	}
 
-	difficultyLvl(a, b, c) {
-		let level = {
-			easy: c,
-			middle: b,
-			hard: a,
+	obj(easy, middle, hard) {
+		return {
+			easy,
+			middle,
+			hard,
 		};
+	}
+
+	difficultyLvl(easy, middle, hard) {
+		let level = this.obj(easy, middle, hard);
 
 		let selectList = document.createElement('select');
-
 		let option;
 		for (const key in level) {
 			if (Object.hasOwnProperty.call(level, key)) {
@@ -66,12 +71,11 @@ class Minesweeper {
 	startGame() {
 		this.countAttempts = this.difficulty.value;
 
-		console.log(this.countAttempts);
-
 		this.countDisarmed = 0;
 
 		this.render();
-		this.fields = this.table.querySelectorAll('.field div');
+
+		this.fields = this.table.children[0].childNodes;
 
 		this.countBombs = this.random(4, 8);
 
@@ -112,7 +116,7 @@ class Minesweeper {
 
 			this.table.append(this.messageInfo, this.restart);
 
-			document.querySelector('.field').remove();
+			this.table.children[0].remove();
 		}
 
 		let disarmed = 25 - this.temp;
@@ -124,13 +128,12 @@ class Minesweeper {
 			this.messageInfo.innerHTML = 'You win!!!';
 
 			this.table.append(this.messageInfo, this.restart);
-			document.querySelector('.field').remove();
+			this.table.children[0].remove();
 		}
 	};
 
 	renderField() {
 		const element = document.createElement('div');
-
 		element.classList.add('field');
 
 		return element;
@@ -138,9 +141,9 @@ class Minesweeper {
 
 	renderCell() {
 		const element = document.createElement('div');
-
 		element.dataset.type = 0;
 		element.classList.add('field__item');
+
 		return element;
 	}
 
@@ -232,5 +235,3 @@ class Minesweeper {
 }
 
 const minesweeper = new Minesweeper(document.querySelector('#root'));
-
-console.log(minesweeper);
