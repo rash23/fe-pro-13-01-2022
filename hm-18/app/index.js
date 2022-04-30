@@ -25,11 +25,11 @@ class Accordion extends BaseComponent {
 		this.show(acc);
 	}
 
-	show(item) {
+	show(items) {
 		let panel;
-		for (let i = 0; i < item.length; i++) {
-			if (item[i].nodeName === 'BUTTON') {
-				item[i].addEventListener('click', function () {
+		for (let i = 0; i < items.length; i++) {
+			if (items[i].nodeName === 'BUTTON') {
+				items[i].addEventListener('click', function () {
 					this.classList.toggle('active');
 					panel = this.nextElementSibling;
 					panel.style.display === 'block' ? (panel.style.display = 'none') : (panel.style.display = 'block');
@@ -38,20 +38,20 @@ class Accordion extends BaseComponent {
 		}
 	}
 
-	createBtn(inner = '') {
+	createBtn(innerHTML = '') {
 		let button = document.createElement('button');
 		button.classList.add('accordion');
-		button.innerHTML = inner;
+		button.innerHTML = innerHTML;
 
 		return button;
 	}
 
-	createPanel(inner = '') {
+	createPanel(innerHTML = '') {
 		let panel = document.createElement('div');
 		panel.classList.add('panel');
 
 		let paragraph = document.createElement('p');
-		paragraph.innerHTML = inner;
+		paragraph.innerHTML = innerHTML;
 		panel.append(paragraph);
 
 		return panel;
