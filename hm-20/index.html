@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Homework 20</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<script defer src="./app/index.js"></script>
+	</head>
+	<body>
+		<form name="quiz" novalidate>
+			<label for="fullName">
+				<span>Your Name</span>
+				<input id="fullName" name="fullName" type="text" required minlength="9" maxlength="26" />
+				<span role="alert" hidden></span>
+			</label>
+			<label for="email">
+				<span>Email</span>
+				<input id="email" name="email" type="email" required />
+				<span role="alert" hidden></span>
+			</label>
+			<label for="email">
+				<span>Age</span>
+				<input id="age" name="age" type="number" min="16" max="60" required />
+				<span role="alert" hidden></span>
+			</label>
+
+			<fieldset name="team-group">
+				<legend>Team</legend>
+				<label for="team-blue" data-inline>
+					<span>Team Blue</span>
+					<input id="team-blue" name="team" type="radio" value="blue" />
+				</label>
+				<label for="team-red" data-inline>
+					<span>Team Read</span>
+					<input id="team-red" name="team" type="radio" value="red" />
+				</label>
+			</fieldset>
+
+			<label for="theme">
+				<span>Theme</span>
+				<select id="theme" name="theme">
+					<option>Light</option>
+					<option>Dark</option>
+				</select>
+			</label>
+
+			<label for="feedback">
+				<span>Feedback</span>
+				<textarea name="feedback"></textarea>
+			</label>
+
+			<label for="conset">
+				<span>Consent</span>
+				<input id="consent" type="checkbox" name="consent" required />
+				<span role="alert" hidden></span>
+			</label>
+
+			<footer>
+				<button name="submitter" type="submit">Send a form</button>
+				<button name="resetter" type="reset">Reset a form</button>
+			</footer>
+		</form>
+		<output></output>
+	</body>
+</html>

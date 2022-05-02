@@ -1,0 +1,40 @@
+form {
+	display: flex;
+	flex-direction: column;
+	max-width: 420px;
+}
+
+label {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+}
+
+label:not(:last-child),
+fieldset:not(:last-child) {
+	margin-bottom: 8px;
+}
+
+label span:first-child {
+	font-weight: bold;
+	margin: 0 0 4px 0;
+}
+
+label[data-inline] {
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+
+label[data-inline] span:first-child {
+	margin: 0 0 0 4px;
+}
+
+button {
+	margin-top: 4px;
+	margin-left: auto;
+	cursor: pointer;
+}
+
+[role='alert'] {
+	color: orangered;
+}
