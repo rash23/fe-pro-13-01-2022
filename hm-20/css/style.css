@@ -38,3 +38,10 @@ button {
 [role='alert'] {
 	color: orangered;
 }
+
+output {
+	padding: 20px;
+	display: block;
+	margin-top: 20px;
+	font-style: 12px;
+}

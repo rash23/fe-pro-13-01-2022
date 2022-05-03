@@ -1,27 +1,23 @@
 const Former = (form, { onSubmit, validators } = {}) => {
-	// Заменяем стандартные ошибки.
 	const ERRORS = {
 		valueMissing: 'Field must have a value',
 		typeMismatch: 'Value must be valid',
+		tooShort: 'Too short (min - 9 symbols, max - 24 symbols)',
+		tooLong: 'Too long',
 	};
 
 	const mapErrorMessage = (element) => {
 		const validity = element.validity;
 
-		// Если кастомная ошибка, вернуть ее значение
 		if (validity.customError) {
 			return element.validationMessage;
 		}
 
-		// Если в объекте validity ключ по которому значение равно true
-		// совпадает с ключом в объекте ERRORS
-		// значит есть ошибка на замену
 		const errorMessage = Object.keys(ERRORS)
 			.filter((validityKey) => validity[validityKey])
 			.map((errorKey) => ERRORS[errorKey])
 			.join();
 
-		// иначе возвращаем стандартную ошибку браузера.
 		return errorMessage || element.validationMessage;
 	};
 
@@ -43,6 +39,15 @@ const Former = (form, { onSubmit, validators } = {}) => {
 			};
 		}, {});
 	};
+	const validateByBrowser = (element) => {
+		if (element.checkValidity()) {
+			return;
+		}
+
+		const error = validators[element.name];
+
+		element.setCustomValidity(error);
+	};
 
 	const validateByCallback = (element) => {
 		const validate = validators[element.name];
@@ -56,20 +61,10 @@ const Former = (form, { onSubmit, validators } = {}) => {
 		element.setCustomValidity(message);
 	};
 
-	const validateByBrowser = (element) => {
-		if (element.checkValidity()) {
-			return;
-		}
-
-		const error = validators[element.name];
-
-		element.setCustomValidity(error);
-	};
-
 	const validateOnSubmit = () => {
-		const candidatesToValidate = Object.keys(validators).reduce((candidates, key) => [...candidates, form[key]], []);
+		const passwordsToValidate = Object.keys(validators).reduce((passwords, key) => [...passwords, form[key]], []);
 
-		for (const element of candidatesToValidate) {
+		for (const element of passwordsToValidate) {
 			const error = validators[element.name];
 
 			if (typeof error === 'function') {
@@ -86,7 +81,7 @@ const Former = (form, { onSubmit, validators } = {}) => {
 		validateOnSubmit();
 
 		if (form.reportValidity()) {
-			onSubmit(serialize());
+			onSubmit(serialize(form));
 		}
 
 		event.preventDefault();
@@ -125,24 +120,26 @@ const Former = (form, { onSubmit, validators } = {}) => {
 	}
 };
 
-// value -> текущее значение value инпута
-// formValues -> объект со значениями всей формы.
-
-// true - ошибка
-// false - ошибки нет
 const validators = {
-	fullName: (value, formValues) => {
-		return value && value === formValues.email && 'Your name must not be the same as email';
+	password: (value, formValues) => {
+		return value && value === formValues.email && 'Your password must not be the same as email';
 	},
+
+	passwordConfirm: (value, formValues) => {
+		return value && value !== formValues.password && 'Please repeat password';
+	},
+
 	email: 'Your email must be real',
 	consent: 'You must agree with our rules',
 };
 
-const onSubmit = (state) => {
-	console.log(state);
-};
-
-Former(document.forms.quiz, {
-	onSubmit,
+Former(document.forms.authorization, {
+	onSubmit: (state) => {
+		document.querySelector('output').innerHTML = `
+		{<br>
+		    email: ${state.email} <br>
+			password: ${state.password} <br>
+		}`;
+	},
 	validators,
 });
