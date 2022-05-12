@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>DragAndDrop</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<script defer src="./app/index.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<form class="form" name="form">
+				<p class="text">Add your aim</p>
+				<input name="text" type="text" required maxlength="40" />
+				<button name="btn" type="submit">Submit</button>
+			</form>
+			<section class="container">
+				<p class="text container__item">To do</p>
+				<p class="text container__item">Done</p>
+			</section>
+			<section class="container">
+				<ul class="list container__item">
+					<li class="list__item" draggable="true">Become a JavaScript developer</li>
+				</ul>
+				<ul class="dropzone container__item"></ul>
+			</section>
+		</div>
+	</body>
+</html>
