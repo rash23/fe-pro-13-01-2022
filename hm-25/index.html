@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<script defer src="./app/login.js"></script>
+	</head>
+	<body>
+		<form name="authorization" action="#" novalidate>
+			<label for="email">
+				<p>Email:</p>
+				<input name="email" type="email" required value="demo@demo.com" />
+				<span class="errors" role="alert-mail"></span>
+			</label>
+
+			<label for="pass">
+				<p>Password:</p>
+				<input name="password" type="password" required value="super_secret" />
+				<span class="errors" role="alert-pass"></span>
+			</label>
+
+			<label class="wrapp" for="remember">
+				<span>Remember me <input name="remember" type="checkbox" /></span>
+			</label>
+			<button name="login">Login</button>
+		</form>
+	</body>
+</html>
