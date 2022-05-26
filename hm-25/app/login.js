@@ -14,16 +14,12 @@ const usersTable = {
 };
 
 const form = document.forms.authorization;
-const email = form.email;
-const pass = form.password;
-const remember = form.remember;
-const submit = form.login;
 
-submit.addEventListener('click', (e) => {
+const { email, password, remember, login } = form;
+
+login.addEventListener('submit', (e) => {
 	e.preventDefault();
 	if (checkMember() && remember.checked) {
-		console.log('fff');
-		console.log(email.value);
 		document.cookie = `USER_AUTH=${email.value};max-age=1000000;`;
 		document.location.href = './pages/todo.html';
 	}
@@ -42,7 +38,7 @@ const checkValidation = () => {
 		email.nextElementSibling.textContent = 'email not valid';
 		isValid = false;
 	}
-	if (!validatePass(pass.value)) {
+	if (!validatePass(password.value)) {
 		pass.nextElementSibling.textContent = 'pass must be >= 6';
 		isValid = false;
 	}
@@ -56,7 +52,7 @@ const checkMember = () => {
 	let isValid = true;
 	if (checkValidation()) {
 		if (usersTable.hasOwnProperty(email.value)) {
-			if (usersTable[email.value].password === pass.value) {
+			if (usersTable[email.value].password === password.value) {
 			} else {
 				isValid = false;
 				alertPass.innerHTML = 'wrong password';
