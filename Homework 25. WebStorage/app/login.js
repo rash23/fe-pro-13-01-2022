@@ -17,7 +17,7 @@ const form = document.forms.authorization;
 
 const { email, password, remember, login } = form;
 
-login.addEventListener('submit', (e) => {
+form.addEventListener('submit', (e) => {
 	e.preventDefault();
 	if (checkMember() && remember.checked) {
 		document.cookie = `USER_AUTH=${email.value};max-age=1000000;`;
