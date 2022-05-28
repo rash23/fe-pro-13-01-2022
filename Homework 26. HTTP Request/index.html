@@ -4,7 +4,23 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<link rel="stylesheet" href="./styles/style.css" />
+		<script type="module" defer src="./app/index.js"></script>
+
+		<title>Homework 26. HTTP Request</title>
 	</head>
-	<body></body>
+	<body>
+		<form name="todo">
+			<div class="wrapper">
+				<div class="inp">
+					<input name="task" type="text" />
+					<span class="errors"></span>
+				</div>
+				<button name="btn" type="submit">Add task</button>
+			</div>
+		</form>
+		<button class="clear-btn">clear all</button>
+		<span id="loader" style="display: none">Loading... please wait</span>
+		<ul class="list"></ul>
+	</body>
 </html>
