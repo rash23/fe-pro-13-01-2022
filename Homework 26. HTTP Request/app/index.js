@@ -65,6 +65,12 @@ form.addEventListener('submit', async (event) => {
 	errors.textContent = '';
 });
 
+list.addEventListener('click', ({ target }) => {
+	if (target.classList.contains('list-item')) {
+		target.classList.toggle('completed');
+	}
+});
+
 clearBtn.addEventListener('click', async () => {
 	while (list.firstChild) {
 		let id = list.firstChild.getAttribute('num');
@@ -75,11 +81,5 @@ clearBtn.addEventListener('click', async () => {
 		await deleteTodoByIs(id);
 
 		list.removeChild(list.firstChild);
-	}
-});
-
-list.addEventListener('click', ({ target }) => {
-	if (target.classList.contains('list-item')) {
-		target.classList.toggle('completed');
 	}
 });
