@@ -19,7 +19,7 @@ export const createNewP = (value) => {
 };
 
 export const createTask = (task) => {
-	const { id, title, completed } = task;
+	let { id, title, completed } = task;
 
 	let crtTask = createNewList(id);
 	let p = createNewP(title);

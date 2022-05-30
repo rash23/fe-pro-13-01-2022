@@ -72,14 +72,18 @@ list.addEventListener('click', ({ target }) => {
 });
 
 clearBtn.addEventListener('click', async () => {
-	while (list.firstChild) {
-		let id = list.firstChild.getAttribute('num');
+	let clone = list.cloneNode(true);
 
-		list.firstChild.classList.add('disabled');
-		list.firstChild.lastChild.disabled = true;
+	while (clone.firstChild) {
+		let id = clone.firstChild.getAttribute('num');
+
+		clone.firstChild.classList.add('disabled');
+		clone.firstChild.lastChild.disabled = true;
 
 		await deleteTodoByIs(id);
 
-		list.removeChild(list.firstChild);
+		clone.removeChild(clone.firstChild);
 	}
+
+	list.replaceWith(clone);
 });
