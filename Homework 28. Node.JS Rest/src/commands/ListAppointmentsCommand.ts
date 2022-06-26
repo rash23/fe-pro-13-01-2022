@@ -1,5 +1,5 @@
-import { Appointment } from "../domain/appointment";
-import { AppointmentRepository } from "../ports/repositories/appointment";
+import { Appointment } from '../domain/appointment';
+import { AppointmentRepository } from '../ports/repositories/appointment';
 
 type ListAppointmentCommandParams = {
 	completed?: boolean;

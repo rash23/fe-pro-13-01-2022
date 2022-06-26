@@ -44,7 +44,15 @@ export class Appointment {
 		});
 	}
 
+	static toModel(appointment: Appointment): Appointment {
+		return new Appointment(appointment.record);
+	}
+
 	private static generateId(now: Date): string {
 		return `AP-${now.getHours()}/${now.getMinutes()}/${now.getSeconds()}/${now.getMilliseconds()}`;
+	}
+
+	update(partial: Partial<AppointmentRecord>): void {
+		this.record = { ...this.record, ...partial };
 	}
 }
