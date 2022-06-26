@@ -79,7 +79,7 @@ export class AppointmentController {
 		return appointment;
 	};
 
-	handleUpdate = async (req: Request, res: Response): Promise<Appointment> => {
+	handleUpdate = async (req: Request): Promise<Appointment> => {
 		const { id } = req.params;
 
 		const appointment = await new UpdateAppointmentCommand(this.appointmentRepository).execute({
@@ -89,8 +89,6 @@ export class AppointmentController {
 		const record = Appointment.toRecord(appointment);
 
 		this.nodeCliOutput.print(`[${record.id}] has been completed [${record.completed}] `);
-
-		res.status(200);
 
 		return appointment;
 	};

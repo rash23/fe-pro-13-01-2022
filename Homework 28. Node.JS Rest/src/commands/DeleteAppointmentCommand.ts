@@ -15,10 +15,7 @@ export class DeleteAppointmentCommand {
 		if (!appointment) {
 			throw new NotFoundError();
 		}
-		const modelOfAppointment = Appointment.toModel(appointment);
-		await this.appointmentRepository.remove(modelOfAppointment.id);
-
-		console.log(appointment);
+	
 		return appointment;
 	}
 }

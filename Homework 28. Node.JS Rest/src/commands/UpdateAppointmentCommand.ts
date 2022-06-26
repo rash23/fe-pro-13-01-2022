@@ -23,7 +23,7 @@ export class UpdateAppointmentCommand {
 
 		const modelOfAppointment = Appointment.toModel(appointment);
 
-		modelOfAppointment.update({ completed: true, updated_at: new Date().toISOString() });
+		modelOfAppointment.update({ completed: true });
 
 		return await this.appointmentRepository.save(modelOfAppointment);
 	}
