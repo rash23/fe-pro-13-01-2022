@@ -15,7 +15,7 @@ export class DeleteAppointmentCommand {
 		if (!appointment) {
 			throw new NotFoundError();
 		}
-	
+
 		return appointment;
 	}
 }

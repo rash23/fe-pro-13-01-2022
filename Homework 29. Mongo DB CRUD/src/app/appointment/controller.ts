@@ -30,11 +30,11 @@ export class AppointmentController {
 		this.router = Router({ mergeParams: true });
 
 		this.router.post('/', route(this.handleCreate, createBodySchema));
-		this.router.post('/:id/pick', route(this.handlePick));
+		this.router.post('/:id/pick', route(this.handlePick, createBodySchema));
 		this.router.get('/:id', route(this.handleGet));
 		this.router.get('/', route(this.handleList));
 		this.router.delete('/:id', route(this.handleDelete));
-		this.router.post('/:id/complete', route(this.handleComplete as any));
+		this.router.post('/:id/complete', route(this.handleComplete));
 	}
 
 	process() {
@@ -106,22 +106,18 @@ export class AppointmentController {
 		this.nodeCliOutput.print(`[${id} record] has been picked`);
 	};
 
-	handleDelete = async (req: Request<DeleteParams>, res: Response): Promise<Appointment> => {
+	handleDelete = async (req: Request<DeleteParams>, res: Response): Promise<void> => {
 		const { id } = req.params;
 		const appointment = await new DeleteAppointmentCommand(this.appointmentRepository).execute({
 			id,
 		});
 
 		const record = Appointment.toRecord(appointment);
-
 		await this.appointmentRepository.remove(record.id);
-		console.log(record);
 
-		this.nodeCliOutput.print(`[${record.id}] has been deleted`);
+		this.nodeCliOutput.print(`[${id}] has been deleted`);
 
 		res.status(204);
-
-		return appointment;
 	};
 
 	handleComplete = async (req: Request<CompleteParams>): Promise<void> => {
@@ -129,7 +125,6 @@ export class AppointmentController {
 
 		await new CompleteAppointmentCommand(this.appointmentRepository).execute({
 			id,
-			completed: true,
 		});
 
 		this.nodeCliOutput.print(`[${id}] has been completed`);

@@ -64,8 +64,8 @@ export class Appointment {
 		this.record.operator = operator;
 	}
 
-	complete(complete: boolean): void {
-		this.record.completed = complete;
+	complete(): void {
+		this.update({ completed: true });
 	}
 
 	static toRecord(appointment: Appointment): AppointmentRecord {

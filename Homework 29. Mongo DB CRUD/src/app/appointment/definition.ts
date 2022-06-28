@@ -29,7 +29,6 @@ export type DeleteParams = {
 
 export type CompleteParams = {
 	id: AppointmentId;
-	completed: boolean;
 };
 
 export type PickBody = AppointmentOperator;
