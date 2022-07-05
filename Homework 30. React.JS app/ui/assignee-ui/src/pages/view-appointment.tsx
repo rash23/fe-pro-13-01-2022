@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getAppointment } from '../shared/api/appointment';
-import { StyledContainer } from '../components/layout.styled';
+import { StyledHeader, StyledContainer, StyledText, StyledWrap } from '../components/layout.styled';
 import { Appointment } from '../shared/domain/appointment';
 
 type PageParams = {
@@ -27,10 +27,10 @@ export const ViewAppointmentPage: FunctionComponent = () => {
 
 	return (
 		<>
-			<h1>Your are welcome here</h1>
+			<StyledHeader>Your are welcome here!</StyledHeader>
 			<StyledContainer>
-				<p>Your ticket:</p>
-				{appointment && <span>{appointment.ticket}</span>}
+				<StyledText>Your ticket:</StyledText>
+				<StyledWrap> {appointment && <span>{appointment.ticket}</span>}</StyledWrap>
 			</StyledContainer>
 		</>
 	);
