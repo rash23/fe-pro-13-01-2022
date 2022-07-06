@@ -1,45 +1,26 @@
 import React, { FunctionComponent, useState } from 'react';
-
+import { Appointment } from '.././shared/domain/appointment';
 import { StyledNavigateWrapper, StyleBtn } from '../templates/navigate-appoinment/navigate-appoinment.styled';
 import { baseURL } from '../shared/api/request';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-type dataAppointment = {
-	data: {
-		id: string;
-		ticket: string;
-		assignee: {
-			fullName: string;
-			email: string;
-		};
-		operator?: {
-			fullName: string;
-			email: string;
-		};
-		completed: boolean;
-		created_at: string;
-		updated_at: string;
-	};
+export type NavigateAppointmentProps = {
+	appointment: Appointment;
 };
 
-export const MoveToAppointment: FunctionComponent<dataAppointment> = (props: dataAppointment) => {
+export const MoveToAppointment: FunctionComponent<NavigateAppointmentProps> = (props: NavigateAppointmentProps) => {
 	const navigate = useNavigate();
 	const [isCopied, setCopied] = useState(false);
+	const uri = `${baseURL}/${props.appointment.id}`;
 
 	const copyAppointment = () => {
-		if (props.data !== null) {
-			const uri = `${baseURL}/${props.data.id}`;
+		navigator.clipboard.writeText(String(uri));
 
-			navigator.clipboard.writeText(String(uri));
-
-			setCopied(true);
-		}
+		setCopied(true);
 	};
 
 	const moveToAppointment = () => {
-		if (props.data !== null) {
-			return navigate(`../${props.data.id}`, { replace: true });
-		}
+		navigate(`../${props.appointment.id}`, { replace: true });
 	};
 
 	return (
@@ -59,6 +40,7 @@ export const MoveToAppointment: FunctionComponent<dataAppointment> = (props: dat
 				)}
 
 				<StyleBtn onClick={moveToAppointment}>Navigate</StyleBtn>
+				<Link to={props.appointment.id}>{uri}</Link>
 			</StyledNavigateWrapper>
 		</>
 	);
